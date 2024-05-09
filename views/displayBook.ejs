@@ -1,0 +1,35 @@
+<html lang="pl">
+<%- include ('partials/head')%> 
+
+<body>
+  <%- include ('partials/navigation')%>
+  <h1><%= h1 %></h1>  
+ 
+  <table border="1">
+    <tr>
+      <th>Nr</th>
+      <th>Tytuł</th>
+      <th>Autor</th>
+      <th>Rok</th>
+      <th>Strony</th>
+      <th>Średnia ocena</th>
+      <th>Ilość opinii</th>
+    </tr>
+    <% date.forEach(row => { %>
+    <tr>
+      <td><%= row.id %></td>
+      <td><%= row.tytul %></td>
+      <td><%= row.autor %></td>
+      <td><%= row.rok %></td>
+      <td><%= row.strony %></td>
+      <td><%= row.opinia %></td>
+      <td><%= row.ilosc %></td>
+    </tr>
+    <% }); %>
+  </table>
+</body>
+</html>
+
+
+
+

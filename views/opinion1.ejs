@@ -1,0 +1,28 @@
+ 
+      <html lang="pl">
+        <%- include ('partials/head')%> 
+           
+          <body>
+              <%- include ('partials/navigation')%>
+              <h1> <%= h1 %></h1>  
+              <p1> <%= message %></p1> 
+              <img id="powiekszony-obrazek" src="obraz4.jpg" ><br>
+        
+               <br>
+              <div>
+                <form method="POST" action="/opinion1">
+                  <p>Prosze podac numer książki której dodajemy opinie: </p>  
+                    <input type="number" name="id" placeholder="Numer Ksiażki" min="1" required/>
+                    <select name="opinia" id="opinia" required>
+                      <option value=5>*****</option> 
+                      <option value=4>****</option>
+                      <option value=3>***</option>
+                      <option value=2>**</option>
+                      <option value=1S>*</option>
+                  </select>
+                    <input type="submit" value="Dodaj">
+                </form>
+            </body>
+     
+    </html>
+ 

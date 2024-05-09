@@ -1,0 +1,67 @@
+const express = require('express');
+const app = express();
+const PORT = 3000;
+const bodyParser = require('body-parser');
+const path = require('path');
+const mysql = require('mysql2');
+
+const http = require('http');
+//const dis1 = require('./moduly/Display');
+const addP = require('./Models/addPOST');
+const cor = require('./Models/correction');
+const cor1 = require('./Models/correction1');
+const del = require('./Models/del');
+const del1 = require('./Models/del1');
+const op1 = require('./Models/opinion1');
+
+
+const homeRouter =require('./routes/home');
+const addRouter =require('./routes/add');
+const correctionRouter =require('./routes/correction');
+const delRouter =require('./routes/del');
+const displayRouter =require('./routes/display');
+const opinionRouter =require('./routes/opinion');
+
+//łączenie z bazą danych
+
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root', 
+  password: 'haslo1', 
+  database: 'ksiazki' 
+});
+
+//połączenie, opis
+ 
+connection.connect((err) => {
+  if (err) {
+    console.error('Błąd połączenia z bazą danych:', err);
+    return;
+  }
+  console.log('Połączono z bazą danych MySQL');
+});
+
+var currentDate = new Date(); // Pobranie bieżącej daty i czasu
+var currentYear = currentDate.getFullYear(); // Pobranie roku z bieżącej daty
+
+ 
+app.use(homeRouter); 
+app.use(addRouter); 
+app.use(correctionRouter); 
+app.use(delRouter); 
+app.use(displayRouter);
+app.use(opinionRouter);
+ 
+app.use((req, res, next) => {
+    console.log(`Request ${req.method} on path ${req.url} ${new Date()}`);
+    next();
+  });
+//app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
+ app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
+  
+
+app.listen(PORT, () => {
+  console.log(`Serwer nasłuchuje na ${PORT}`);
+});

@@ -1,0 +1,19 @@
+<html lang="pl">
+  <%- include ('partials/head')%> 
+   <body><%- include ('partials/navigation')%>
+    <h1> <%= h1 %></h1>   
+        <p1> <%= message %> </p1>      
+        <img id="powiekszony-obrazek3" src=" obraz3.jpg ">
+        <p>Podaj informacje o nowej książce: </p> 
+        <div>
+          <form method="POST" action="/addBook">
+            <input type="text" name="tytul" placeholder="Tytuł" required />
+            <input type="text" name="autor" placeholder="Autor"  required/>
+            <input type="number" name="rok" placeholder="Rok wydania" min=1200 max="<%= year %>"  required />
+            <input type="number" name="strony" placeholder="Ilość stron" min="1" required  />
+            <input type="submit" value="dodaj">
+            <input type="reset" value="wprowadź ponownie">
+          </form>         
+        </div>
+      </body>  
+ </html>

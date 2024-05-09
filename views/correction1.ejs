@@ -1,0 +1,52 @@
+<html lang="pl">
+    <%- include ('partials/head')%>     
+    <body>
+        <%- include ('partials/navigation')%>
+        <h1> <%= h1 %></h1>        
+        
+        <img id="powiekszony-obrazek" src="obraz1.jpg" ><br>
+    
+            <form method="POST" action="/correction1" >
+                <label for="id">Wprowadź zmiany:</label>
+                <input type="hidden" id="id" name="id" value="<%= book.id %>">
+                <input type="text" name="tytul" placeholder="Tytuł" value="<%= book.tytul %>" required />
+                <input type="text" name="autor" placeholder="Autor" value="<%= book.autor %>" required/>
+                <input type="number" name="rok" placeholder="Rok wydania" min="1200" max="<%= year %>" value="<%= book.rok %>" required />
+                <input type="number" name="strony" placeholder="Ilość stron" min="1" value="<%= book.strony %>" required  />
+                <button type="button" id="correctionButton">ZATWIERDŹ</button>
+            </form>
+
+        <script>
+            document.getElementById("correctionButton").addEventListener("click", async function() {
+    const bookIdElement = document.getElementById("id");
+    const bookId = bookIdElement.value;
+    const tytulElement = document.querySelector('input[name="tytul"]');
+    const tytul = tytulElement.value;
+    const autorElement = document.querySelector('input[name="autor"]');
+    const autor = autorElement.value;
+    const rokElement = document.querySelector('input[name="rok"]');
+    const rok = rokElement.value;
+    const stronyElement = document.querySelector('input[name="strony"]');
+    const strony = stronyElement.value;
+
+    const response = await fetch("/correction1/" + bookId, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            tytul: tytul,
+            autor: autor,
+            rok: rok,
+            strony: strony
+        })
+    });
+
+     if(response){
+        window.location.href="/correction";
+     }
+    });
+
+        </script>
+    </body>
+</html>

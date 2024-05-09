@@ -1,0 +1,21 @@
+<html lang="pl">
+<%- include ('partials/head')%> 
+
+<body>
+  <%- include ('partials/navigation')%>
+  <h1><%= h1 %></h1>  
+  <img id="powiekszony-obrazek" src="obraz5.jpg"  >
+  <p>Wybierz metodę sortowania: </p> 
+  <form action="/displayChoice" method="post">
+    <label for="sortowanie">Sortowanie:</label>
+    <select id="sortowanie" name="sortowanie">
+      <option value="brak">brak</option>
+      <option value="tytul"> po tytule</option>
+      <option value="autor"> po autorze</option>
+    </select>
+    <p>Wybierz autora: </p>  
+    <input type="text" name="autor" placeholder="podaj autora"  /> 
+    <button type="submit">Wybierz</button>
+  </form>
+</body>
+</html>

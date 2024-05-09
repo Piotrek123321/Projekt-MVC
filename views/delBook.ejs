@@ -1,0 +1,36 @@
+<html lang="pl">
+<head>
+    <%- include ('partials/head')%> 
+</head>
+<body>
+    <%- include ('partials/navigation')%>
+
+    <h1><%= h1 %></h1>  
+    <p><%= message %></p>  
+    <img id="powiekszony-obrazek" src="obraz2.jpg">
+    <p>
+        Tytuł: <%= book.tytul %><br>
+        Autor: <%= book.autor %><br>
+        Rok wydania: <%= book.rok %><br><br>
+    </p>
+            
+    <form id="deleteForm" action="/delBook" method="POST">  
+        <input type="hidden" id="id" name="id" value="<%= book.id %>"> 
+        <a href="/del">ANULUJ</a> 
+        <button type="button" id="deleteButton">USUŃ</button>
+    </form>
+
+    <script>
+    document.getElementById("deleteButton").addEventListener("click", async function() {
+        const bookIdElement = document.getElementById("id");
+        const bookId = bookIdElement.value;
+        const response = await fetch("/delBook/" + bookId, {
+            method: "DELETE"
+        });
+        if(response){
+            window.location.href="/del";
+        }
+    });
+</script>
+</body>
+</html>  
